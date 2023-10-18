@@ -4,6 +4,7 @@ require('dotenv').config();
 const userRoute = require('./routes/user.route')
 const authRoutes = require('./routes/auth.route')
 const mongoose = require('mongoose');
+const cors = require('cors');
 const {MONGO} = process.env
 mongoose.connect(MONGO)
 .then(()=>{
@@ -12,6 +13,7 @@ mongoose.connect(MONGO)
 .catch((err)=>{
     console.log("Mongodb not connected",err);
 })
+app.use(cors());
 app.use(express.json());
 app.use('/api',userRoute);
 app.use('/api/auth',authRoutes);
